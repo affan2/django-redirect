@@ -35,7 +35,10 @@ def get_redirect_patterns():
         extra = {}
         pattern = r'^%s$' % redirect.from_url
 
-        extra.update({'url': '%s' % redirect.to_url})
+        extra.update({
+            'url': '%s' % redirect.to_url,
+            'query_string': True,
+        })
 
         if redirect.http_status == 302:
             extra.update({'permanent': False})

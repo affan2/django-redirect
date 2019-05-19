@@ -53,7 +53,7 @@ class Redirect(models.Model):
         unique_together = (('site', 'from_url'),)
         ordering = ('-uses_regex',)
 
-    def __unicode__(self):
+    def __str__(self):
         return _("Redirect: %(from)s --> %(to)s") % {'from': self.from_url, 'to': self.to_url}
 
     def save(self, *args, **kwargs):

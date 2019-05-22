@@ -26,7 +26,7 @@ to_url_helptext = _('Absolute path or full domain. Example: '
 
 
 class Redirect(models.Model):
-    site = models.ForeignKey(Site)
+    site = models.ForeignKey(Site, on_delete=models.CASCADE)
 
     from_url = models.CharField(_('From URL'), max_length=255, unique=True,
                                 db_index=True, help_text=from_url_helptext)
@@ -57,7 +57,7 @@ class Redirect(models.Model):
         return _("Redirect: %(from)s --> %(to)s") % {'from': self.from_url, 'to': self.to_url}
 
     def save(self, *args, **kwargs):
-        # strip slashes from beggining, add slashes to the end
+        # strip slashes from beginning, add slashes to the end
         # only if not a regex
         if not self.uses_regex:
             self.from_url = self.from_url.lstrip('/')

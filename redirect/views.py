@@ -1,6 +1,7 @@
 # view patterns
 from django.http import HttpResponsePermanentRedirect, HttpResponseRedirect, HttpResponseGone
-from django.utils.log import getLogger
+from logging import getLogger
+
 logger = getLogger('django.request')
 
 
@@ -37,9 +38,5 @@ def redirect_to(request, url, permanent=True, query_string=False, **kwargs):
         klass = permanent and HttpResponsePermanentRedirect or HttpResponseRedirect
         return klass(url)
     else:
-        logger.warning('Gone: %s' % request.path,
-                    extra={
-                        'status_code': 410,
-                        'request': request
-                    })
+        logger.warning('Gone: %s' % request.path, extra={'status_code': 410, 'request': request})
         return HttpResponseGone()

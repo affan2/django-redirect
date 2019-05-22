@@ -29,7 +29,7 @@ class Redirect(models.Model):
     site = models.ForeignKey(Site, on_delete=models.CASCADE)
 
     from_url = models.CharField(_('From URL'), max_length=255, unique=True,
-                                db_index=True, help_text=from_url_helptext)
+                                db_index=True, help_text=from_url_helptext, primary_key=True)
 
     to_url = models.CharField(_('To URL'), max_length=255,
                               db_index=True, help_text=to_url_helptext)
@@ -72,4 +72,4 @@ class Redirect(models.Model):
             self.from_url = '^$'
             self.uses_regex = True
 
-        super(Redirect, self).save(args, kwargs)
+        super(Redirect, self).save(*args, **kwargs)

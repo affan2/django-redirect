@@ -11,7 +11,7 @@ def group_arguments(seq, group=254):
         This is due to argument restrictions in python.
         http://docs.djangoproject.com/en/dev/topics/http/urls/#patterns
     """
-    return (seq[pos:pos + group] for pos in range(0, len(seq), group))
+    return (seq[pos:pos + group] for pos in list(range(0, len(seq), group)))
 
 
 def get_redirect_patterns():

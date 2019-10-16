@@ -8,6 +8,8 @@ from . import dynamic_urls
 class RedirectAdmin(admin.ModelAdmin):
     list_display = ['from_url', 'to_url', 'site', 'http_status', 'uses_regex', 'status']
 
+    autocomplete_fields = ('site', )
+
     def save_model(self, request, object_to_be_saved, form, change):
         instance = form.save()
         # for sites that are not in debug mode reload
